@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const { findUsers } = require("../services/Clients.service")
-const {createUser} = require("../services/Clients.service")
+const { findUsers, updateUser } = require("../services/Clients.service")
+const { createUser } = require("../services/Clients.service")
 /* GET users listing. */
 router
   .get('/', async function (req, res, next) {
@@ -20,7 +20,7 @@ router
   })
   .post('/', async (req, res) => {
     try {
-      let {body : user} = req
+      let { body: user } = req
       const result = await createUser(user)
       res.status(200).json({
         msg: "usuario creado",
@@ -32,6 +32,22 @@ router
         msg: "Internal Server Error",
       })
     }
-  });
+  })
+  .put("/:id", async (req, res) => {
+    try {
+      let {params:{id}} = req
+      let {body:{nombre,apellido}} = req
+      const result = await updateUser(id,nombre,apellido)
+      res.status(200).json({
+        msg: "usuario actualizado",
+        body: result.ops,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        msg: "Internal Server Error",
+      })
+    }
+  })
 
 module.exports = router;
