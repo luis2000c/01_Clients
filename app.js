@@ -6,6 +6,8 @@ require("dotenv").config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var permissionsRouter = require('./routes/permissions');
+var rolesRouter = require('./routes/roles');
 
 var app = express();
 
@@ -16,5 +18,8 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+// app.use('/user/change-password');
+app.use('/roles',rolesRouter);
+app.use('/permissions',permissionsRouter);
 
 module.exports = app;
