@@ -1,6 +1,7 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
 
 require("dotenv").config();
 
@@ -10,7 +11,7 @@ var permissionsRouter = require('./routes/permissions');
 var rolesRouter = require('./routes/roles');
 
 var app = express();
-
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());//Permite receptar peticiones con el verbo post
 app.use(express.urlencoded({ extended: false }));
