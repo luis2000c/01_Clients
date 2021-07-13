@@ -5,8 +5,9 @@ const COLLECTION2 = "roles";
 
 const findRoles = (id) => new Promise(async (resolve, reject) => {
     try {
-
+        //Inicializo MongoClient para que me retorne la Base de Datos
         const DB = await MongoConnection();
+        //Obtenemos la collection
         const roles = DB.collection(COLLECTION2);
 
         const rolesList = await roles.find({}).toArray();
